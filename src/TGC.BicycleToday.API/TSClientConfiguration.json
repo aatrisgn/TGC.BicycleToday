@@ -1,0 +1,15 @@
+{
+	"runtime": "NetCore31",
+	"documentGenerator": {
+	},
+	"codeGenerators": {
+		"openApiToTypeScriptClient": {
+			"template": "Angular", //generate an Angular specific client 
+			"promiseType": "Promise", //use Promises
+			"httpClass": "HttpClient", //use the Angular HttpClient
+			"injectionTokenType": "InjectionToken", //use InjectionToken to configure the baseURL
+			"rxJsVersion": 6.0,
+			"output": "api.generated.clients.ts"
+		}
+	}
+}
