@@ -4,7 +4,11 @@
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddOpenApiDocument();
+builder.Services.AddOpenApiDocument(document =>
+{
+	document.Title = "TGC.BicycleToday API Spec";
+	document.Description = "API for exposing data to Angular Client (BicycleToday.App). Be aware this API is not ready for consumption by third-party. Breaking changes can occur without notice.";
+});
 
 builder.Services.AddCors(options =>
 {
