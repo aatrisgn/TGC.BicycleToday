@@ -1,4 +1,6 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿using TGC.Cosmos.Extensions;
+
+var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
@@ -6,6 +8,14 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerDocument();
+
+builder.Services.ConfigureCosmos(options =>
+{
+	options.Endpoint = "https://localhost:8081";
+	options.DatabaseName = "BicycleToday";
+	options.UseManagedIdentity = false;
+	options.Enabled = true;
+});
 
 var app = builder.Build();
 

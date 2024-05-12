@@ -15,6 +15,10 @@
 	</PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\TGC.Framework\src\Cosmos\TGC.Cosmos\TGC.Cosmos\TGC.Cosmos.csproj" />
+  </ItemGroup>
+
 	<Target Name="NSwagGenerateOpenApiDefinition" Condition="$(MSBuildProjectName.Equals('TGC.BicycleToday.API'))" BeforeTargets="AfterBuild">
 		<Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net70) aspnetcore2openapi /project:$(MSBuildProjectFile) /output:$(OutDir)openapi.json /configuration:$(Configuration) /noBuild:true" ContinueOnError="true">
 			<Output TaskParameter="ExitCode" PropertyName="NSwagGenerateOpenApiDefinitionExitCode" />

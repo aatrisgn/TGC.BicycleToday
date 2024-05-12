@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TGC.BicycleToday.API", "TGC.BicycleToday.API\TGC.BicycleToday.API.csproj", "{BDA5C12A-5722-46CF-BAF1-FE384986B12C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TGC.BicycleToday.API", "TGC.BicycleToday.API\TGC.BicycleToday.API.csproj", "{BDA5C12A-5722-46CF-BAF1-FE384986B12C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TGC.Cosmos", "..\..\TGC.Framework\src\Cosmos\TGC.Cosmos\TGC.Cosmos\TGC.Cosmos.csproj", "{93577407-319B-4C6D-B3C9-BC8BA542B6D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{BDA5C12A-5722-46CF-BAF1-FE384986B12C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDA5C12A-5722-46CF-BAF1-FE384986B12C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDA5C12A-5722-46CF-BAF1-FE384986B12C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{93577407-319B-4C6D-B3C9-BC8BA542B6D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{93577407-319B-4C6D-B3C9-BC8BA542B6D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{93577407-319B-4C6D-B3C9-BC8BA542B6D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{93577407-319B-4C6D-B3C9-BC8BA542B6D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
