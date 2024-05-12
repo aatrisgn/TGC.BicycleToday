@@ -4,7 +4,7 @@ using TGC.Cosmos.Abstractions;
 namespace TGC.BicycleToday.API.Controllers;
 [Route("api/user/preferences")]
 [ApiController]
-public class UserPreferencesController : ControllerBase
+public class UserPreferencesController : BaseAPIController
 {
 	private readonly ICosmosRepository<UserPreferences> _userPreferencesRepository;
 
@@ -20,17 +20,20 @@ public class UserPreferencesController : ControllerBase
 	}
 
 	[HttpGet("{userId}")]
+	[ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
 	public async Task<UserPreferences> Get(Guid userId)
 	{
 		return await _userPreferencesRepository.GetByIdAsync(userId.ToString());
 	}
 
+	[ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
 	[HttpPost("{userId}")]
 	public async Task<UserPreferences> Create(Guid userId, [FromBody] UserPreferences userPreferences)
 	{
 		return await _userPreferencesRepository.CreateAsync(userPreferences);
 	}
 
+	[ProducesResponseType(typeof(void), StatusCodes.Status200OK)]
 	[HttpPut("{userId}")]
 	public Task Update(Guid userId)
 	{

@@ -3,8 +3,7 @@
 namespace TGC.BicycleToday.API.Controllers;
 
 [ApiController]
-[Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+public class WeatherForecastController : BaseAPIController
 {
 	private static readonly string[] Summaries = new[]
 	{
@@ -19,6 +18,7 @@ public class WeatherForecastController : ControllerBase
 	}
 
 	[HttpGet(Name = "GetWeatherForecast")]
+	[ProducesResponseType(typeof(IEnumerable<WeatherForecast>), StatusCodes.Status200OK)]
 	public IEnumerable<WeatherForecast> Get()
 	{
 		return Enumerable.Range(1, 5).Select(index => new WeatherForecast
