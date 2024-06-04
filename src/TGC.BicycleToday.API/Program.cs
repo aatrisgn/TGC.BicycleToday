@@ -7,7 +7,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerDocument();
+//builder.Services.AddSwaggerDocument();
 
 builder.Services.ConfigureCosmos(options =>
 {
@@ -41,7 +41,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
 	app.UseOpenApi();
-	app.UseSwaggerUi3();
+	app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();

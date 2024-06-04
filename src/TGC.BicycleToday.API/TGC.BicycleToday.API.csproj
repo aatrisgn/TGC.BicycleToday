@@ -8,46 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <PackageReference Include="NSwag.AspNetCore" Version="14.0.7" />
     <PackageReference Include="NSwag.MSBuild" Version="14.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
->>>>>>> 1db6ab1ad37e4af12d94f4a32dd8f05db3f584b4
-    <PackageReference Include="TGC.Common" Version="0.1.0" />
-    <PackageReference Include="TGC.CSharpCodingStandards" Version="2.1.0" />
-	<PackageReference Include="NSwag.AspNetCore" Version="13.8.2" />
-	<PackageReference Include="NSwag.MSBuild" Version="13.8.2">
-		<PrivateAssets>All</PrivateAssets>
-	</PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.1" />
+	<PackageReference Include="TGC.Common" Version="0.1.0" />
+	<PackageReference Include="TGC.CSharpCodingStandards" Version="2.1.0" />
   </ItemGroup>
 
-<<<<<<< HEAD
   <ItemGroup>
     <ProjectReference Include="..\..\..\TGC.Framework\src\Cosmos\TGC.Cosmos\TGC.Cosmos\TGC.Cosmos.csproj" />
   </ItemGroup>
 
-	<Target Name="NSwagGenerateOpenApiDefinition" Condition="$(MSBuildProjectName.Equals('TGC.BicycleToday.API'))" BeforeTargets="AfterBuild">
-		<Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net70) aspnetcore2openapi /project:$(MSBuildProjectFile) /output:$(OutDir)openapi.json /configuration:$(Configuration) /noBuild:true" ContinueOnError="true">
-			<Output TaskParameter="ExitCode" PropertyName="NSwagGenerateOpenApiDefinitionExitCode" />
-		</Exec>
-		<Error Condition="'$(NSwagGenerateOpenApiDefinitionExitCode)' &lt; '0'" Text="Unable to generate OpenApi definition for test api client. Check build output for detailed error message." />
-	</Target>
-	
-	<Target Name="GenerateTypeScriptClient" AfterTargets="NSwagGenerateOpenApiDefinition">
-		<Exec WorkingDirectory="$(ProjectDir)" EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net70) run TSClientConfiguration.json /variables:Configuration=$(Configuration),ProjectName=$(ProjectName)" />
-	  </Target>
-
-=======
-	<PropertyGroup>
-		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
-	</PropertyGroup>
+  <ItemGroup>
+    <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="Roslynator.Analyzers" Version="4.12.3" />
+    <PackageReference Update="Roslynator.CodeAnalysis.Analyzers" Version="4.12.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Update="Roslynator.Formatting.Analyzers" Version="4.12.3">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
 	<Target Name="NSwag" AfterTargets="Build">
 		<Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Net80) run $(NSwagConfigurationFile) /variables:OutputPath=$(OutputPath)" />
 	</Target>
->>>>>>> 1db6ab1ad37e4af12d94f4a32dd8f05db3f584b4
+
 </Project>
