@@ -1,7 +1,0 @@
-{
-  "name": "BicycleToday",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular"
-}

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+import { environment } from 'src/environments/environment';
+
+type ProfileType = {
+  name?: string
+};
 
 @Component({
   selector: 'app-profile',
@@ -6,10 +13,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./profile.component.sass']
 })
 export class ProfileComponent implements OnInit {
+  profile!: ProfileType;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+  ) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.getProfile(environment.apiConfig.uri);
   }
 
+  getProfile(url: string) {
+    this.http.get(url)
+      .subscribe(profile => {
+        console.log(profile);
+        this.profile = profile;
+      });
+  }
 }

@@ -3,19 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProfileComponent } from './components/profile/profile.component';
 import { HomeComponent } from './components/home/home.component';
 import { FailedLoginComponent } from './components/failed-login/failed-login.component';
-
-const routes: Routes = [];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
+import { MsalGuard } from '@azure/msal-angular';
+import { BrowserUtils } from '@azure/msal-browser';
+import { PreferencesComponent } from './components/preferences/preferences.component';
 
 const routes: Routes = [
   {
       path: 'profile',
       component: ProfileComponent,
       canActivate: [MsalGuard]
+  },
+  {
+    path: 'preferences',
+    component: PreferencesComponent,
+    canActivate: [MsalGuard]
   },
   {
       path: '',

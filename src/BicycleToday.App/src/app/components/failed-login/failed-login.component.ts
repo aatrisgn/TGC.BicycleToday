@@ -11,5 +11,4 @@ export class FailedLoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
 }
