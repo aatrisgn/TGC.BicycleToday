@@ -18,7 +18,15 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { NavbarComponent } from "./components/navbar/navbar.component";
 import { MatTooltipModule } from '@angular/material/tooltip';
 import {MatIconModule} from '@angular/material/icon';
-
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { FooterComponent } from './components/footer/footer.component';
+import { OpacityLayerComponent } from './components/opacity-layer/opacity-layer.component';
+import {MatCardModule} from '@angular/material/card';
+import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 export function loggerCallback(logLevel: LogLevel, message: string) {
   console.log(message);
@@ -74,7 +82,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
         ProfileComponent,
         HomeComponent,
         FailedLoginComponent,
-        NavbarComponent
+        NavbarComponent,
+        FooterComponent,
+        OpacityLayerComponent,
+        LoadingScreenComponent
     ],
     providers: [
         {
@@ -96,7 +107,8 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
         },
         MsalService,
         MsalGuard,
-        MsalBroadcastService
+        MsalBroadcastService,
+        provideAnimationsAsync()
     ],
     bootstrap: [AppComponent, MsalRedirectComponent],
     imports: [
@@ -111,9 +123,13 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
         MatTooltipModule,
         MatMenuModule,
         MatTableModule,
+        MatCardModule,
+        MatInputModule,
         HttpClientModule,
         MsalModule,
-        
+        MatProgressSpinnerModule,
+        MatGridListModule,
+        MatCheckboxModule
     ]
 })
 export class AppModule { }

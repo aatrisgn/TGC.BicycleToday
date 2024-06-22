@@ -1,4 +1,4 @@
-﻿namespace TGC.BicycleToday.API;
+﻿namespace TGC.BicycleToday.API.Models;
 
 public class ClientConfigurationResponse
 {

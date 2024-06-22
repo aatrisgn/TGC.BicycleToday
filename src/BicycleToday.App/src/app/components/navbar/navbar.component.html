@@ -1,9 +1,27 @@
-<mat-toolbar color="primary">
-    <mat-toolbar-row>
-        <span>My App</span>
-        <span class="example-spacer"></span>
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon">
-            <mat-icon>menu</mat-icon>
+<mat-toolbar>
+    <a mat-button [routerLink]="['home']"><h2>Bicycle Today</h2></a>
+    <span class="example-spacer"></span>
+    <a mat-button [routerLink]="['preferences']">Weather preferences</a>
+    <button *ngIf="!loginDisplay" (click)="login()" mat-button>
+        <mat-icon>login</mat-icon>
+        <span>login</span>
+    </button>
+    <button *ngIf="loginDisplay" mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+        <mat-icon>account_circle</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <span *ngIf="loginDisplay">{{getUserName()}}</span>
+        <button (click)="editProfile()" mat-menu-item>
+          <mat-icon>manage_accounts</mat-icon>
+          <span>Change profile</span>
         </button>
-    </mat-toolbar-row>
-</mat-toolbar>
+        <button mat-menu-item>
+          <mat-icon>lock</mat-icon>
+          <span>Reset password</span>
+        </button>
+        <button mat-menu-item (click)="logout()">
+          <mat-icon>logout</mat-icon>
+          <span>Log out</span>
+        </button>
+      </mat-menu>
+  </mat-toolbar>

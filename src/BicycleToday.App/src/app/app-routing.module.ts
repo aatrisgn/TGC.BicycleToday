@@ -23,6 +23,10 @@ const routes: Routes = [
       component: HomeComponent
   },
   {
+    path: 'home',
+    redirectTo: ''
+},
+  {
       path: 'login-failed',
       component: FailedLoginComponent
   }

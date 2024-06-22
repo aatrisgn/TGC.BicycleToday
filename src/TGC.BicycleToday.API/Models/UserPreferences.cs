@@ -1,6 +1,6 @@
 ﻿using TGC.Cosmos.Models;
 
-namespace TGC.BicycleToday.API.Controllers;
+namespace TGC.BicycleToday.API.Models;
 
 public class UserPreferences : RepositoryEntity
 {
