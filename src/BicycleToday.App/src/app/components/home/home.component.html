@@ -17,19 +17,19 @@
                             <form class="example-form">
                                 <mat-form-field class="example-full-width">
                                   <mat-label>Home address</mat-label>
-                                  <input matInput value="Some Street 1">
+                                  <input matInput [formControl]="homeAddress" required placeholder="Some Street 1">
                                 </mat-form-field>
                                 <mat-form-field class="example-full-width">
                                     <mat-label>Work address</mat-label>
-                                    <input matInput value="Other Street 2">
+                                    <input matInput [formControl]="workAddress" required placeholder="Other Street 2">
                                   </mat-form-field>
                             </form>
                         </div>
-                        <mat-checkbox class="example-margin">Remember my addresses in browser (Only matters for non-profile)</mat-checkbox>
+                        <mat-checkbox [(ngModel)]="storeAddressInLocalStorage" class="example-margin">Remember my addresses in browser (Only matters for non-profile)</mat-checkbox>
                       </mat-card-content>
                     <mat-card-actions>
-                        <button mat-button>Should I bike to work?</button>
-                        <button mat-button>Clear</button>
+                        <button (click)="GetWeatherRecommendation()" mat-button>Should I bike to work?</button>
+                        <button (click)="ClearFormular()" mat-button>Clear</button>
                     </mat-card-actions>
                 </mat-card>
             </div>

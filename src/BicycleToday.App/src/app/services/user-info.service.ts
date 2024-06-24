@@ -17,9 +17,6 @@ export class UserInfoServic {
     public GetUserName():string {
         const account = this.authService.getAccount();
 
-        console.log()
-        console.log(account);
-
         if(this.isUserLoggedIn()){
             return account.username;
         } else {

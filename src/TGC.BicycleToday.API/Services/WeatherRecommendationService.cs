@@ -50,9 +50,9 @@ public class WeatherRecommendationService : IWeatherRecommendationService
 
 		var combinedWeatherRecomendation = new WeatherRecommendation(timeSpecificWeatherRecommendationAtStartTime, timeSpecificWeatherRecommendationAtEndtime);
 
-		if (_userContext.IsAuthenticated)
+		if (_userContext.IsAuthenticated())
 		{
-			HttpExceptionFactory.ThrowIfNull<UnauthorizedException>(_userContext.UserIdentifier);
+			HttpExceptionFactory.ThrowIfNull<UnauthorizedException>(_userContext.UserIdentifier, "No user identifier was found.");
 			await _userPreferenceVisitor.AdjustForUserPreferencesAsync(_userContext.UserIdentifier, combinedWeatherRecomendation);
 		}
 

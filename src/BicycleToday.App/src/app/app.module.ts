@@ -27,6 +27,8 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { LoadingScreenComponent } from './components/loading-screen/loading-screen.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function loggerCallback(logLevel: LogLevel, message: string) {
   console.log(message);
@@ -129,7 +131,10 @@ export function MSALGuardConfigFactory(): MsalGuardConfiguration {
         MsalModule,
         MatProgressSpinnerModule,
         MatGridListModule,
-        MatCheckboxModule
+        MatCheckboxModule,
+        MatFormFieldModule,
+        FormsModule,
+        ReactiveFormsModule
     ]
 })
 export class AppModule { }

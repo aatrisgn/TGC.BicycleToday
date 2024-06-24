@@ -17,6 +17,72 @@ namespace TGC.BicycleToday {
 export const API_BASE_URL = new OpaqueToken('API_BASE_URL');
 
 @Injectable()
+export class ClientConfigurationClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    getClientConfiguration(): Observable<void> {
+        let url_ = this.baseUrl + "/api/configuration/client";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetClientConfiguration(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetClientConfiguration(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processGetClientConfiguration(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 401) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result401: any = null;
+            let resultData401 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result401 = ProblemDetails.fromJS(resultData401);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result401);
+            }));
+        } else if (status === 403) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result403: any = null;
+            let resultData403 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result403 = ProblemDetails.fromJS(resultData403);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result403);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+}
+
+@Injectable()
 export class UserPreferencesClient {
     private http: HttpClient;
     private baseUrl: string;
@@ -282,6 +348,78 @@ export class UserPreferencesClient {
 }
 
 @Injectable()
+export class WeatherClient {
+    private http: HttpClient;
+    private baseUrl: string;
+    protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
+
+    constructor(@Inject(HttpClient) http: HttpClient, @Optional() @Inject(API_BASE_URL) baseUrl?: string) {
+        this.http = http;
+        this.baseUrl = baseUrl ?? "";
+    }
+
+    getWeatherRecommendation(homeAddress: string, workAddress: string): Observable<void> {
+        let url_ = this.baseUrl + "/api/weather/recommendation/{homeAddress}/{workAddress}";
+        if (homeAddress === undefined || homeAddress === null)
+            throw new Error("The parameter 'homeAddress' must be defined.");
+        url_ = url_.replace("{homeAddress}", encodeURIComponent("" + homeAddress));
+        if (workAddress === undefined || workAddress === null)
+            throw new Error("The parameter 'workAddress' must be defined.");
+        url_ = url_.replace("{workAddress}", encodeURIComponent("" + workAddress));
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_ : any = {
+            observe: "response",
+            responseType: "blob",
+            headers: new HttpHeaders({
+            })
+        };
+
+        return this.http.request("get", url_, options_).pipe(_observableMergeMap((response_ : any) => {
+            return this.processGetWeatherRecommendation(response_);
+        })).pipe(_observableCatch((response_: any) => {
+            if (response_ instanceof HttpResponseBase) {
+                try {
+                    return this.processGetWeatherRecommendation(response_ as any);
+                } catch (e) {
+                    return _observableThrow(e) as any as Observable<void>;
+                }
+            } else
+                return _observableThrow(response_) as any as Observable<void>;
+        }));
+    }
+
+    protected processGetWeatherRecommendation(response: HttpResponseBase): Observable<void> {
+        const status = response.status;
+        const responseBlob =
+            response instanceof HttpResponse ? response.body :
+            (response as any).error instanceof Blob ? (response as any).error : undefined;
+
+        let _headers: any = {}; if (response.headers) { for (let key of response.headers.keys()) { _headers[key] = response.headers.get(key); }}
+        if (status === 401) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result401: any = null;
+            let resultData401 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result401 = ProblemDetails.fromJS(resultData401);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result401);
+            }));
+        } else if (status === 403) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            let result403: any = null;
+            let resultData403 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result403 = ProblemDetails.fromJS(resultData403);
+            return throwException("A server side error occurred.", status, _responseText, _headers, result403);
+            }));
+        } else if (status !== 200 && status !== 204) {
+            return blobToText(responseBlob).pipe(_observableMergeMap(_responseText => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            }));
+        }
+        return _observableOf<void>(null as any);
+    }
+}
+
+@Injectable()
 export class WeatherForecastClient {
     private http: HttpClient;
     private baseUrl: string;
@@ -429,6 +567,8 @@ export interface IProblemDetails {
 export class RepositoryEntity implements IRepositoryEntity {
     id?: string;
     eTag?: string | undefined;
+    collectionType?: string;
+    schemaVersion?: number;
     created?: Date;
     lastEdited?: Date;
 
@@ -445,6 +585,8 @@ export class RepositoryEntity implements IRepositoryEntity {
         if (_data) {
             this.id = _data["id"];
             this.eTag = _data["eTag"];
+            this.collectionType = _data["collectionType"];
+            this.schemaVersion = _data["schemaVersion"];
             this.created = _data["created"] ? new Date(_data["created"].toString()) : <any>undefined;
             this.lastEdited = _data["lastEdited"] ? new Date(_data["lastEdited"].toString()) : <any>undefined;
         }
@@ -461,6 +603,8 @@ export class RepositoryEntity implements IRepositoryEntity {
         data = typeof data === 'object' ? data : {};
         data["id"] = this.id;
         data["eTag"] = this.eTag;
+        data["collectionType"] = this.collectionType;
+        data["schemaVersion"] = this.schemaVersion;
         data["created"] = this.created ? this.created.toISOString() : <any>undefined;
         data["lastEdited"] = this.lastEdited ? this.lastEdited.toISOString() : <any>undefined;
         return data;
@@ -470,6 +614,8 @@ export class RepositoryEntity implements IRepositoryEntity {
 export interface IRepositoryEntity {
     id?: string;
     eTag?: string | undefined;
+    collectionType?: string;
+    schemaVersion?: number;
     created?: Date;
     lastEdited?: Date;
 }

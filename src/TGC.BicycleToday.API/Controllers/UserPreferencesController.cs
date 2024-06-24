@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TGC.BicycleToday.API.Models;
 using TGC.Cosmos.Abstractions;
 
 namespace TGC.BicycleToday.API.Controllers;

@@ -20,7 +20,6 @@ public class DawaClient : IDawaClient
 
 		var httpClient = _httpClientFactory.CreateClient();
 
-
 		throw new NotImplementedException();
 	}
 }

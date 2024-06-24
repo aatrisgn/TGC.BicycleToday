@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using TGC.BicycleToday.API.Models;
 
 namespace TGC.BicycleToday.API.Controllers;
 [Route("api/configuration/client")]
